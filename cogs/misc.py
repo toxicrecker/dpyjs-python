@@ -17,7 +17,7 @@ class Misc(commands.Cog):
 		if option.lower()=="user":
 			if mode.lower()=="standart":
 				async with aiohttp.ClientSession() as cs:
-					async with cs.get(f"https://osu.ppy.sh/api/get_user?u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as r:
+					async with cs.get(f"https://osu.ppy.sh/api/get_user?u={user}&k={os.environ['OSU_TOKEN']}") as r:
 						async with ctx.typing():
 							res = await r.json()
 							embed=embed=discord.Embed(color=discord.Color.green())
@@ -37,7 +37,7 @@ class Misc(commands.Cog):
 						cs.close()
 			elif mode.lower()=="taiko":
 				async with aiohttp.ClientSession() as cs:
-					async with cs.get(f"https://osu.ppy.sh/api/get_user?m=1&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as r:
+					async with cs.get(f"https://osu.ppy.sh/api/get_user?m=1&u={user}&k={os.environ['OSU_TOKEN']}") as r:
 						async with ctx.typing():
 							res = await r.json()
 							embed=embed=discord.Embed(color=discord.Color.green())
@@ -57,7 +57,7 @@ class Misc(commands.Cog):
 						cs.close()
 			elif mode.lower()=="mania":
 				async with aiohttp.ClientSession() as cs:
-					async with cs.get(f"https://osu.ppy.sh/api/get_user?m=3&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as r:
+					async with cs.get(f"https://osu.ppy.sh/api/get_user?m=3&u={user}&k={os.environ['OSU_TOKEN']}") as r:
 						async with ctx.typing():
 							res = await r.json()
 							embed=embed=discord.Embed(color=discord.Color.green())
@@ -77,7 +77,7 @@ class Misc(commands.Cog):
 						cs.close()
 			elif mode.lower()=="ctb":
 				async with aiohttp.ClientSession() as cs:
-					async with cs.get(f"https://osu.ppy.sh/api/get_user?m=2&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as r:
+					async with cs.get(f"https://osu.ppy.sh/api/get_user?m=2&u={user}&k={os.environ['OSU_TOKEN']}") as r:
 						async with ctx.typing():
 							res = await r.json()
 							embed=embed=discord.Embed(color=discord.Color.green())
@@ -98,7 +98,7 @@ class Misc(commands.Cog):
 		elif option.lower()=="recent":
 			if mode.lower()=="standart":
 				async with aiohttp.ClientSession() as cs:
-					async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as r:
+					async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?u={user}&k={os.environ['OSU_TOKEN']}") as r:
 						async with ctx.typing():
 							res = await r.json()
 							if res==[]:
@@ -106,14 +106,14 @@ class Misc(commands.Cog):
 								embed.title="Not Found."
 								await ctx.send(embed=embed)
 							else:
-								async with cs.get(f"https://osu.ppy.sh/api/get_user?u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as s_r:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user?u={user}&k={os.environ['OSU_TOKEN']}") as s_r:
 									res_1=await s_r.json()
 									user_pic_url=f"http://s.ppy.sh/a/{res_1[0]['user_id']}"
 									title=f":flag_{res_1[0]['country'].lower()}: {res_1[0]['username']}"
 								embed=embed=discord.Embed(color=discord.Color.purple())
 								embed.title=title
 								embed.set_thumbnail(url=user_pic_url)
-								async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?u={user}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as recents:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?u={user}&limit=10&k={os.environ['OSU_TOKEN']}") as recents:
 									given_recents=await recents.json()
 									x=0
 									ids=[]
@@ -122,7 +122,7 @@ class Misc(commands.Cog):
 										x+=1
 									titles=[]
 									for id in ids:
-										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?b={id}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as beatmaps:
+										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?b={id}&limit=10&k={os.environ['OSU_TOKEN']}") as beatmaps:
 											given_response=await beatmaps.json()
 											titles.append(given_response[0]['title'])
 								x=0
@@ -132,7 +132,7 @@ class Misc(commands.Cog):
 								await ctx.send(embed=embed)
 			elif mode.lower()=="taiko":
 				async with aiohttp.ClientSession() as cs:
-					async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?m=1&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as r:
+					async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?m=1&u={user}&k={os.environ['OSU_TOKEN']}") as r:
 						async with ctx.typing():
 							res = await r.json()
 							if res==[]:
@@ -140,14 +140,14 @@ class Misc(commands.Cog):
 								embed.title="Not Found."
 								await ctx.send(embed=embed)
 							else:
-								async with cs.get(f"https://osu.ppy.sh/api/get_user?m=1&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as s_r:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user?m=1&u={user}&k={os.environ['OSU_TOKEN']}") as s_r:
 									res_1=await s_r.json()
 									user_pic_url=f"http://s.ppy.sh/a/{res_1[0]['user_id']}"
 									title=f":flag_{res_1[0]['country'].lower()}: {res_1[0]['username']}"
 								embed=embed=discord.Embed(color=discord.Color.purple())
 								embed.title=title
 								embed.set_thumbnail(url=user_pic_url)
-								async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?m=1&u={user}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as recents:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?m=1&u={user}&limit=10&k={os.environ['OSU_TOKEN']}") as recents:
 									given_recents=await recents.json()
 									x=0
 									ids=[]
@@ -156,7 +156,7 @@ class Misc(commands.Cog):
 										x+=1
 									titles=[]
 									for id in ids:
-										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?m=1&b={id}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as beatmaps:
+										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?m=1&b={id}&limit=10&k={os.environ['OSU_TOKEN']}") as beatmaps:
 											given_response=await beatmaps.json()
 											titles.append(given_response[0]['title'])
 								x=0
@@ -166,7 +166,7 @@ class Misc(commands.Cog):
 								await ctx.send(embed=embed)
 			elif mode.lower()=="ctb":
 				async with aiohttp.ClientSession() as cs:
-					async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?m=2&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as r:
+					async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?m=2&u={user}&k={os.environ['OSU_TOKEN']}") as r:
 						async with ctx.typing():
 							res = await r.json()
 							if res==[]:
@@ -174,14 +174,14 @@ class Misc(commands.Cog):
 								embed.title="Not Found."
 								await ctx.send(embed=embed)
 							else:
-								async with cs.get(f"https://osu.ppy.sh/api/get_user?m=2&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as s_r:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user?m=2&u={user}&k={os.environ['OSU_TOKEN']}") as s_r:
 									res_1=await s_r.json()
 									user_pic_url=f"http://s.ppy.sh/a/{res_1[0]['user_id']}"
 									title=f":flag_{res_1[0]['country'].lower()}: {res_1[0]['username']}"
 								embed=embed=discord.Embed(color=discord.Color.purple())
 								embed.title=title
 								embed.set_thumbnail(url=user_pic_url)
-								async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?m=2&u={user}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as recents:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?m=2&u={user}&limit=10&k={os.environ['OSU_TOKEN']}") as recents:
 									given_recents=await recents.json()
 									x=0
 									ids=[]
@@ -190,7 +190,7 @@ class Misc(commands.Cog):
 										x+=1
 									titles=[]
 									for id in ids:
-										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?m=2&b={id}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as beatmaps:
+										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?m=2&b={id}&limit=10&k={os.environ['OSU_TOKEN']}") as beatmaps:
 											given_response=await beatmaps.json()
 											titles.append(given_response[0]['title'])
 								x=0
@@ -200,7 +200,7 @@ class Misc(commands.Cog):
 								await ctx.send(embed=embed)
 			elif mode.lower()=="mania":
 				async with aiohttp.ClientSession() as cs:
-					async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?m=3&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as r:
+					async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?m=3&u={user}&k={os.environ['OSU_TOKEN']}") as r:
 						async with ctx.typing():
 							res = await r.json()
 							if res==[]:
@@ -208,14 +208,14 @@ class Misc(commands.Cog):
 								embed.title="Not Found."
 								await ctx.send(embed=embed)
 							else:
-								async with cs.get(f"https://osu.ppy.sh/api/get_user?m=3&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as s_r:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user?m=3&u={user}&k={os.environ['OSU_TOKEN']}") as s_r:
 									res_1=await s_r.json()
 									user_pic_url=f"http://s.ppy.sh/a/{res_1[0]['user_id']}"
 									title=f":flag_{res_1[0]['country'].lower()}: {res_1[0]['username']}"
 								embed=embed=discord.Embed(color=discord.Color.purple())
 								embed.title=title
 								embed.set_thumbnail(url=user_pic_url)
-								async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?m=3&u={user}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as recents:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user_recent?m=3&u={user}&limit=10&k={os.environ['OSU_TOKEN']}") as recents:
 									given_recents=await recents.json()
 									x=0
 									ids=[]
@@ -224,7 +224,7 @@ class Misc(commands.Cog):
 										x+=1
 									titles=[]
 									for id in ids:
-										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?m=3&b={id}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as beatmaps:
+										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?m=3&b={id}&limit=10&k={os.environ['OSU_TOKEN']}") as beatmaps:
 											given_response=await beatmaps.json()
 											titles.append(given_response[0]['title'])
 								x=0
@@ -235,7 +235,7 @@ class Misc(commands.Cog):
 		elif option.lower()=="best":
 			if mode.lower()=="standart":
 				async with aiohttp.ClientSession() as cs:
-					async with cs.get(f"https://osu.ppy.sh/api/get_user_best?u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as r:
+					async with cs.get(f"https://osu.ppy.sh/api/get_user_best?u={user}&k={os.environ['OSU_TOKEN']}") as r:
 						async with ctx.typing():
 							res = await r.json()
 							if res==[]:
@@ -243,14 +243,14 @@ class Misc(commands.Cog):
 								embed.title="Not Found."
 								await ctx.send(embed=embed)
 							else:
-								async with cs.get(f"https://osu.ppy.sh/api/get_user?u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as s_r:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user?u={user}&k={os.environ['OSU_TOKEN']}") as s_r:
 									res_1=await s_r.json()
 									user_pic_url=f"http://s.ppy.sh/a/{res_1[0]['user_id']}"
 									title=f":flag_{res_1[0]['country'].lower()}: {res_1[0]['username']}"
 								embed=embed=discord.Embed(color=discord.Color.purple())
 								embed.title=title
 								embed.set_thumbnail(url=user_pic_url)
-								async with cs.get(f"https://osu.ppy.sh/api/get_user_best?u={user}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as recents:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user_best?u={user}&limit=10&k={os.environ['OSU_TOKEN']}") as recents:
 									given_recents=await recents.json()
 									x=0
 									ids=[]
@@ -259,7 +259,7 @@ class Misc(commands.Cog):
 										x+=1
 									titles=[]
 									for id in ids:
-										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?b={id}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as beatmaps:
+										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?b={id}&limit=10&k={os.environ['OSU_TOKEN']}") as beatmaps:
 											given_response=await beatmaps.json()
 											titles.append(given_response[0]['title'])
 								x=0
@@ -269,7 +269,7 @@ class Misc(commands.Cog):
 								await ctx.send(embed=embed)
 			if mode.lower()=="taiko":
 				async with aiohttp.ClientSession() as cs:
-					async with cs.get(f"https://osu.ppy.sh/api/get_user_best?m=1&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as r:
+					async with cs.get(f"https://osu.ppy.sh/api/get_user_best?m=1&u={user}&k={os.environ['OSU_TOKEN']}") as r:
 						async with ctx.typing():
 							res = await r.json()
 							if res==[]:
@@ -277,14 +277,14 @@ class Misc(commands.Cog):
 								embed.title="Not Found."
 								await ctx.send(embed=embed)
 							else:
-								async with cs.get(f"https://osu.ppy.sh/api/get_user?m=1&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as s_r:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user?m=1&u={user}&k={os.environ['OSU_TOKEN']}") as s_r:
 									res_1=await s_r.json()
 									user_pic_url=f"http://s.ppy.sh/a/{res_1[0]['user_id']}"
 									title=f":flag_{res_1[0]['country'].lower()}: {res_1[0]['username']}"
 								embed=embed=discord.Embed(color=discord.Color.purple())
 								embed.title=title
 								embed.set_thumbnail(url=user_pic_url)
-								async with cs.get(f"https://osu.ppy.sh/api/get_user_best?m=1&u={user}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as recents:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user_best?m=1&u={user}&limit=10&k={os.environ['OSU_TOKEN']}") as recents:
 									given_recents=await recents.json()
 									x=0
 									ids=[]
@@ -293,7 +293,7 @@ class Misc(commands.Cog):
 										x+=1
 									titles=[]
 									for id in ids:
-										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?m=1&b={id}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as beatmaps:
+										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?m=1&b={id}&limit=10&k={os.environ['OSU_TOKEN']}") as beatmaps:
 											given_response=await beatmaps.json()
 											titles.append(given_response[0]['title'])
 								x=0
@@ -303,7 +303,7 @@ class Misc(commands.Cog):
 								await ctx.send(embed=embed)
 			if mode.lower()=="ctb":
 				async with aiohttp.ClientSession() as cs:
-					async with cs.get(f"https://osu.ppy.sh/api/get_user_best?m=2&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as r:
+					async with cs.get(f"https://osu.ppy.sh/api/get_user_best?m=2&u={user}&k={os.environ['OSU_TOKEN']}") as r:
 						async with ctx.typing():
 							res = await r.json()
 							if res==[]:
@@ -311,14 +311,14 @@ class Misc(commands.Cog):
 								embed.title="Not Found."
 								await ctx.send(embed=embed)
 							else:
-								async with cs.get(f"https://osu.ppy.sh/api/get_user?m=2&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as s_r:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user?m=2&u={user}&k={os.environ['OSU_TOKEN']}") as s_r:
 									res_1=await s_r.json()
 									user_pic_url=f"http://s.ppy.sh/a/{res_1[0]['user_id']}"
 									title=f":flag_{res_1[0]['country'].lower()}: {res_1[0]['username']}"
 								embed=embed=discord.Embed(color=discord.Color.purple())
 								embed.title=title
 								embed.set_thumbnail(url=user_pic_url)
-								async with cs.get(f"https://osu.ppy.sh/api/get_user_best?m=2&u={user}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as recents:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user_best?m=2&u={user}&limit=10&k={os.environ['OSU_TOKEN']}") as recents:
 									given_recents=await recents.json()
 									x=0
 									ids=[]
@@ -327,7 +327,7 @@ class Misc(commands.Cog):
 										x+=1
 									titles=[]
 									for id in ids:
-										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?m=2&b={id}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as beatmaps:
+										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?m=2&b={id}&limit=10&k={os.environ['OSU_TOKEN']}") as beatmaps:
 											given_response=await beatmaps.json()
 											titles.append(given_response[0]['title'])
 								x=0
@@ -337,7 +337,7 @@ class Misc(commands.Cog):
 								await ctx.send(embed=embed)
 			if mode.lower()=="mania":
 				async with aiohttp.ClientSession() as cs:
-					async with cs.get(f"https://osu.ppy.sh/api/get_user_best?m=3&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as r:
+					async with cs.get(f"https://osu.ppy.sh/api/get_user_best?m=3&u={user}&k={os.environ['OSU_TOKEN']}") as r:
 						async with ctx.typing():
 							res = await r.json()
 							if res==[]:
@@ -345,14 +345,14 @@ class Misc(commands.Cog):
 								embed.title="Not Found."
 								await ctx.send(embed=embed)
 							else:
-								async with cs.get(f"https://osu.ppy.sh/api/get_user?m=3&u={user}&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as s_r:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user?m=3&u={user}&k={os.environ['OSU_TOKEN']}") as s_r:
 									res_1=await s_r.json()
 									user_pic_url=f"http://s.ppy.sh/a/{res_1[0]['user_id']}"
 									title=f":flag_{res_1[0]['country'].lower()}: {res_1[0]['username']}"
 								embed=embed=discord.Embed(color=discord.Color.purple())
 								embed.title=title
 								embed.set_thumbnail(url=user_pic_url)
-								async with cs.get(f"https://osu.ppy.sh/api/get_user_best?m=3&u={user}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as recents:
+								async with cs.get(f"https://osu.ppy.sh/api/get_user_best?m=3&u={user}&limit=10&k={os.environ['OSU_TOKEN']}") as recents:
 									given_recents=await recents.json()
 									x=0
 									ids=[]
@@ -361,7 +361,7 @@ class Misc(commands.Cog):
 										x+=1
 									titles=[]
 									for id in ids:
-										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?m=3&b={id}&limit=10&k=8cc26d81bf2e174deea7b8d8a504279c07ba9998") as beatmaps:
+										async with cs.get(f"https://osu.ppy.sh/api/get_beatmaps?m=3&b={id}&limit=10&k={os.environ['OSU_TOKEN']}") as beatmaps:
 											given_response=await beatmaps.json()
 											titles.append(given_response[0]['title'])
 								x=0

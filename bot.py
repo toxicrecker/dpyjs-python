@@ -12,6 +12,7 @@ for cog in filter(lambda c: c.endswith(".py"), listdir("cogs/")):
 #Added by Running Child
 #Start
 admins_list=[662334026098409480,339660347499872256,286591003794604034]
+@commands.command(aliases=["load"])
 async def load_cmd(ctx, extension):
     if ctx.message.author.id in admins_list:
         try:
