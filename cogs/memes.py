@@ -14,8 +14,7 @@ class Memeclass(commands.Cog):
         async with aiohttp.ClientSession() as cs:
             async with cs.get('https://www.reddit.com/r/memes.json') as r:
                 res = await r.json()
-                list_posts=range(0,25)
-                x=random.choice(list_posts) 
+                x=random.randint(0, len(res))
                 data=res['data']['children'][x]['data']
                 title=data['title']
                 hyperlink=f"https://reddit.com{data['permalink']}"
@@ -30,8 +29,7 @@ class Memeclass(commands.Cog):
         async with aiohttp.ClientSession() as cs:
             async with cs.get('https://www.reddit.com/r/animemes.json') as r:
                 res = await r.json()
-                list_posts=range(0,25)
-                x=random.choice(list_posts) 
+                x=random.randint(0, len(res))
                 data=res['data']['children'][x]['data']
                 title=data['title']
                 hyperlink=f"https://reddit.com{data['permalink']}"
@@ -46,8 +44,7 @@ class Memeclass(commands.Cog):
         async with aiohttp.ClientSession() as cs:
             async with cs.get('https://www.reddit.com/r/cursedcursedcomments.json') as r:
                 res = await r.json()
-                list_posts=range(0,25)
-                x=random.choice(list_posts) 
+                x=random.randint(0, len(res))
                 data=res['data']['children'][x]['data']
                 title=data['title']
                 hyperlink=f"https://reddit.com{data['permalink']}"
