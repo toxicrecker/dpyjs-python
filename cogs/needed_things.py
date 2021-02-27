@@ -11,7 +11,7 @@ class Needed_things(commands.Cog):
     def __init__(self,client):
         self.client=client
     
-    @commands.command(aliases=["avatar","Avatar"])
+    @commands.command(aliases=["avatar"])
     async def avatar_cmd(self,ctx,user:discord.Member):
         async with ctx.typing():
             embed_obj=discord.Embed(colour=discord.Colour.dark_purple())
@@ -32,7 +32,7 @@ class Needed_things(commands.Cog):
         else:
             raise error
 
-    @commands.command(aliases=["userinfo","UserInfo","Userinfo","userInfo"])
+    @commands.command(aliases=["userinfo"])
     async def userinfo_cmd(self,ctx,user:discord.Member):
         async with ctx.typing():
             if user.nick==None:
@@ -89,7 +89,7 @@ class Needed_things(commands.Cog):
             await ctx.send(embed=embed_obj)
         else:
             raise error
-    @commands.command(aliases=["serverinfo","Serverinfo"])
+    @commands.command(aliases=["serverinfo"])
     async def serverinfo_cmd(self,ctx):
         async with ctx.typing():
             owner=self.client.get_user(ctx.guild.owner_id)
@@ -109,7 +109,7 @@ class Needed_things(commands.Cog):
         await ctx.send(embed=embed_obj)
 
 
-    @commands.command(aliases=["Vote","vote"])
+    @commands.command(aliases=["vote"])
     async def vote_cmd(self, ctx, countdown: typing.Optional[int] = 30, *,args):
         embed = discord.Embed(
             colour = discord.Colour.gold()
@@ -157,7 +157,7 @@ class Needed_things(commands.Cog):
             await ctx.send("Usage:\nPi Vote 15(optional) argument 1,argument 2(required)")
         else:
             raise error
-    @commands.command(aliases=["quote","Quote"])
+    @commands.command(aliases=["quote"])
     async def quote_cmd(self,ctx):
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://zenquotes.io/api/random") as r:
@@ -168,7 +168,7 @@ class Needed_things(commands.Cog):
                 embed_obj.title=quote
                 embed_obj.set_footer(text=f"Author:{author}")
                 await ctx.send(embed=embed_obj)
-    @commands.command(aliases=["anilist","aniinfo","Anilist","Aniinfo","animeinfo","Animeinfo"])
+    @commands.command(aliases=["anilist","aniinfo","animeinfo"])
     async def mal_cmd(self,ctx,type,*,name):
         if type.lower()=="anime":
             query = '''

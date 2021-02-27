@@ -10,7 +10,7 @@ class Appearance(commands.Cog):
 
 	def __init__(self, client):
 		self.client = client
-	@commands.command(aliases=["status","Status"])
+	@commands.command(aliases=["status"])
 	async def status_cmd(self, ctx, *, activity):
 		if ctx.message.author.id in admins_list:
 			await self.client.change_presence(status=discord.Status.online , activity=discord.Game(activity))

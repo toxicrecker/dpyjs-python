@@ -12,7 +12,7 @@ class Misc(commands.Cog):
 		self.client = client
 
 
-	@commands.command(aliases=["osu","Osu","osuinfo","Osuinfo","OsuInfo"])
+	@commands.command(aliases=["osu","osuinfo"])
 	async def osu_cmd(self, ctx,option,user,mode="standart"):
 		if option.lower()=="user":
 			if mode.lower()=="standart":

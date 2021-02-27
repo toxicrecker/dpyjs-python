@@ -23,7 +23,7 @@ async def load_cmd(ctx, extension):
     else:
         await ctx.send("You are not my master.")
 
-@client.command(aliases=["Unload","unload"])
+@client.command(aliases=["unload"])
 async def unload_cmd(ctx, extension):
     if ctx.message.author.id in admins_list:
         try:
@@ -35,7 +35,7 @@ async def unload_cmd(ctx, extension):
         await ctx.send("You are not my master.")
 
 
-@client.command(aliases=["reload","Reload"])
+@client.command(aliases=["reload"])
 async def reload_cmd(ctx,cog):
     if ctx.message.author.id in admins_list:
         try:

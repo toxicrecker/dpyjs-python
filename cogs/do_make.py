@@ -15,7 +15,7 @@ class Do_make(commands.Cog):
         answer=random.choice(answers)
         await ctx.send(answer)
 
-    @commands.command(aliases=["Make","make"])
+    @commands.command(aliases=["make"])
     async def make_cmd(self,ctx,*,job):
         answer=random.choice(answers)
         await ctx.send(answer)
