@@ -329,7 +329,19 @@ class Needed_things(commands.Cog):
                     await ctx.send(description)
         # else:
         #     await ctx.send(f"Unknown option:`{option}`.\nUsage: `pi anilist <anime/manga> <name of anime/manga>`")
-
+    @commands.command(aliases=["youtube","youtubesearch","ytsearch"])
+    async def ytsearch_cmd(self,ctx,*,name):
+        name_1=name.split()
+        search_keyword=""
+        for words in name_1:
+            search_keyword+=f"{words}+"
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get(f"https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q={search_keyword}&key={youtube_api_key}}") as response:
+                responsed=await response.json()
+                items=responsed['items']
+                #AIzaSyD-Sr0YQc0k3_mKMMcLVmmbaeZTD7jfZcs
+                link=items[0]['id']['videoId']
+                await ctx.send(f"https://youtube.com/watch?v={link}")
 def setup(client):
     client.add_cog(Needed_things(client))
 #End
