@@ -5,7 +5,6 @@ import aiohttp
 import math
 import datetime
 
-#API:8cc26d81bf2e174deea7b8d8a504279c07ba9998
 
 class Misc(commands.Cog):
 	def __init__(self, client):
