@@ -11,23 +11,23 @@ for cog in filter(lambda c: c.endswith(".py"), listdir("cogs/")):
 
 #Added by Running Child
 #Start
-admins_list=[662334026098409480,339660347499872256,286591003794604034]
-@commands.command(aliases=["load"])
+admins_list=[662334026098409480]
+@bot.command(aliases=["load"])
 async def load_cmd(ctx, extension):
     if ctx.message.author.id in admins_list:
         try:
-            client.load_extension(f'cogs.{extension.lower()}')
+            bot.load_extension(f'cogs.{extension.lower()}')
             await ctx.send(extension + ' loaded.')
         except:
             await ctx.send("Something went wrong. Please,check terminal for getting more detailed info.")
     else:
         await ctx.send("You are not my master.")
 
-@client.command(aliases=["unload"])
+@bot.command(aliases=["unload"])
 async def unload_cmd(ctx, extension):
     if ctx.message.author.id in admins_list:
         try:
-            client.unload_extension(f'cogs.{extension.lower()}')
+            bot.unload_extension(f'cogs.{extension.lower()}')
             await ctx.send(extension+' unloaded. Feel free to edit this! =]')
         except:
             await ctx.send("Something went wrong. Please,check terminal for getting more detailed info.")
@@ -35,12 +35,12 @@ async def unload_cmd(ctx, extension):
         await ctx.send("You are not my master.")
 
 
-@client.command(aliases=["reload"])
+@bot.command(aliases=["reload"])
 async def reload_cmd(ctx,cog):
     if ctx.message.author.id in admins_list:
         try:
-            client.unload_extension(f'cogs.{cog.lower()}')
-            client.load_extension(f"cogs.{cog.lower()}")
+            bot.unload_extension(f'cogs.{cog.lower()}')
+            bot.load_extension(f"cogs.{cog.lower()}")
             await ctx.send(f"Reload of {cog.lower()} done.")
         except:
             await ctx.send("Something went wrong. Please,check terminal for getting more detailed info.")
