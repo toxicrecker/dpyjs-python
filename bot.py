@@ -5,7 +5,7 @@ from difflib import get_close_matches
 
 __import__("dotenv").load_dotenv()
 
-bot = commands.Bot(command_prefix="py/", case_insensitive=True, intents=Intents.all())
+bot = commands.Bot(command_prefix="py/", case_insensitive=True, intents=Intents.all(), status=discord.Status.idle, activity=discord.Game("with python"))
 
 for cog in filter(lambda c: c.endswith(".py"), listdir("cogs/")):
     bot.load_extension(f"cogs.{cog[:-3]}")
