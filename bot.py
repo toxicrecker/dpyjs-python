@@ -10,17 +10,6 @@ bot = commands.Bot(command_prefix="py/", case_insensitive=True, intents=Intents.
 for cog in filter(lambda c: c.endswith(".py"), listdir("cogs/")):
     bot.load_extension(f"cogs.{cog[:-3]}")
 
-@bot.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.CommandNotFound):
-        cmd = ctx.invoked_with
-        cmds = [cmd.name for cmd in bot.commands if not cmd.hidden]
-        matches = get_close_matches(cmd, cmds)
-        if len(matches) > 0:
-            await ctx.send(f'Command "{cmd}" not found, maybe you meant "{matches[0]}"?')
-        else:
-            await ctx.send(f'Command "{cmd}" not found, use the help command to know what commands are available')
-
 #Added by Running Child
 #Start
 admins_list=[662334026098409480]
